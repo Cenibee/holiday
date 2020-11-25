@@ -7,22 +7,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NonNull;
 
+@Data
 @Entity
-@Getter @Setter
 public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    // TODO 실제 사원 넘버가 존재하면 AUTO -> IDENTITY로 변경
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
-    private String department;
-    private Date entranceDate;
+    @NonNull private String name;
+    @NonNull private String department;
+    @NonNull private Date entranceDate;
     
-    private Integer holidayCount;
-    private Integer extraHolidayCount;
+    @NonNull private Float holidayCount;
+    @NonNull private Float extraHolidayCount;
 
     private Date resetDate;
 }
