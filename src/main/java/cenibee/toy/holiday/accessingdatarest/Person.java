@@ -8,7 +8,7 @@ import javax.persistence.Id;
 /**
  * this is a Domain Object
  */
-@Entity
+// @Entity
 public class Person {
 
 	@Id
