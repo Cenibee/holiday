@@ -1,28 +1,54 @@
 package cenibee.toy.holiday.employ;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-import lombok.Data;
+import cenibee.toy.holiday.department.Department;
+import cenibee.toy.holiday.history.HolidayHistory;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 
-@Data
 @Entity
+@Getter
+@Setter
 public class Employee {
-    // TODO 실제 사원 넘버가 존재하면 AUTO -> IDENTITY로 변경
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NonNull private String name;
-    @NonNull private String department;
-    @NonNull private Date entranceDate;
-    
-    @NonNull private Float holidayCount;
-    @NonNull private Float extraHolidayCount;
+    @NonNull
+    private String name;
 
-    private Date resetDate;
+    @NonNull
+    private Date entranceDate;
+
+    @NonNull
+    private String mailAddress;
+
+    @NonNull
+    private String phNumber;
+
+    @NonNull
+    private Holiday holiday;
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "department_id", foreignKey = @ForeignKey(name = "EMPLOYEE_BELONG_TO_DEPARTMENT"))
+    private Department department;
+
+    // TODO Paginate
+    @NonNull
+    // TODO cascade
+    @OneToMany
+    private List<HolidayHistory> holidayHistory;
 }
