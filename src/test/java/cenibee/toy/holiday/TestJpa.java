@@ -1,21 +1,26 @@
 package cenibee.toy.holiday;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import cenibee.toy.holiday.department.Department;
 import cenibee.toy.holiday.employ.Employee;
 import cenibee.toy.holiday.employ.EmployeeRepository;
 import cenibee.toy.holiday.employ.Holiday;
 
-@DataJpaTest(properties = "spring.profiles.active=test")
+// TODO DataJpaTest를 사용하면서 내장디비를 사용하지 않는 방법??
+// @DataJpaTest(properties = "spring.profiles.active=test")
+@Transactional
+@AutoConfigureTestEntityManager
+@SpringBootTest(properties = "spring.profiles.active=test")
 public class TestJpa {
     
     @Autowired
@@ -42,7 +47,6 @@ public class TestJpa {
         holiday.setRestHalfOff(false);
 
         emp.setHoliday(holiday);
-        System.out.println("testtest: " + emp.getId());
         entityManager.persist(emp);
 
         Employee foundEmp = repository.findById(emp.getId()).get();
