@@ -6,34 +6,28 @@ import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import cenibee.toy.holiday.department.Department;
+import cenibee.toy.holiday.department.DepartmentRepository;
 import cenibee.toy.holiday.employ.Employee;
 import cenibee.toy.holiday.employ.EmployeeRepository;
 import cenibee.toy.holiday.employ.Holiday;
 
-// TODO DataJpaTest를 사용하면서 내장디비를 사용하지 않는 방법??
-// @DataJpaTest(properties = "spring.profiles.active=test")
-@Transactional
-@AutoConfigureTestEntityManager
-@SpringBootTest(properties = "spring.profiles.active=test")
+@DataJpaTest(properties = "spring.profiles.active=test")
+@AutoConfigureTestDatabase(replace = Replace.NONE)
 public class TestJpa {
-    
     @Autowired
-    private TestEntityManager entityManager;
+    EmployeeRepository repository;
 
     @Autowired
-    private EmployeeRepository repository;
+    DepartmentRepository deptRepository;
 
     @Test
     void testExample() throws Exception {
-        Department department = new Department();
-        department.setName("test team");
-        entityManager.persist(department);
+        Department department = deptRepository.findById(1L).get();
 
         Employee emp = new Employee();
         emp.setName("user");
@@ -47,7 +41,7 @@ public class TestJpa {
         holiday.setRestHalfOff(false);
 
         emp.setHoliday(holiday);
-        entityManager.persist(emp);
+        repository.save(emp);
 
         Employee foundEmp = repository.findById(emp.getId()).get();
 
