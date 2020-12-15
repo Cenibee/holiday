@@ -7,7 +7,6 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		application.profiles("prod");
 		return application.sources(HolidayApplication.class);
 	}
 
