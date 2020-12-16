@@ -11,5 +11,5 @@ import lombok.Setter;
 @Entity
 @DiscriminatorValue("Consumed")
 public class HolidayConsumedHistory extends HolidayHistory {
-	private Boolean isCanceled;
+	private Boolean isCanceled = false;
 }
