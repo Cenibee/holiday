@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
-import cenibee.toy.holiday.employ.Holiday;
+import cenibee.toy.holiday.common.Holiday;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;

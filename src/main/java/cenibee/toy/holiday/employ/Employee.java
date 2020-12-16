@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import cenibee.toy.holiday.common.Holiday;
 import cenibee.toy.holiday.department.Department;
 import cenibee.toy.holiday.history.HolidayHistory;
 import lombok.Getter;

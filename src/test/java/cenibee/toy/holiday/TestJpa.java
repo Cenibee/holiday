@@ -10,11 +10,11 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import cenibee.toy.holiday.common.Holiday;
 import cenibee.toy.holiday.department.Department;
 import cenibee.toy.holiday.department.DepartmentRepository;
 import cenibee.toy.holiday.employ.Employee;
 import cenibee.toy.holiday.employ.EmployeeRepository;
-import cenibee.toy.holiday.employ.Holiday;
 
 @DataJpaTest(properties = "spring.profiles.active=test")
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -36,9 +36,7 @@ public class TestJpa {
         emp.setPhNumber("000-0000-0000");
         emp.setDepartment(department);
 
-        Holiday holiday = new Holiday();
-        holiday.setHolidayCount(15);
-        holiday.setRestHalfOff(false);
+        Holiday holiday = new Holiday(15, false);
 
         emp.setHoliday(holiday);
         repository.save(emp);
