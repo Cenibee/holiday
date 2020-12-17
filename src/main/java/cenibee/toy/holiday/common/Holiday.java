@@ -3,10 +3,12 @@ package cenibee.toy.holiday.common;
 import javax.persistence.Embeddable;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 @RequiredArgsConstructor
 @Embeddable
 public class Holiday {
